@@ -1,6 +1,7 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom'
+import { redirect } from "next/navigation";
 import { loginAction } from '@/lib/actions';
 
 const initialState = {
@@ -11,12 +12,10 @@ const initialState = {
  
 export default function Page() {
   const [state, formAction] = useFormState(loginAction, initialState);
-  console.log(state);
   const { pending } = useFormStatus()
 
   return (
     <form
-      method="#"
       className="flex flex-col items-center justify-center"
       action={formAction}
     >
