@@ -1,27 +1,30 @@
 'use server'
+import setAuthCookie from "@/utils/cookies";
 import { redirect } from "next/navigation";
 
 export async function loginAction(prevState: any, formData: FormData) {
   const email = formData.get('email');
   const password = formData.get('password');
-  let status = null;
+  let ok = false;
   try {
-    const response = await fetch(`${process.env.BE_HOST}/user/signin`, {
+    const response = await fetch(`${process.env.BE_HOST}/auth/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({ password, email }),
     });
+    setAuthCookie(response);
     const result = await response.json();
-    status = response.ok;
+    ok = response.ok;
     return result;
   } catch(err) {
     return {
       message: 'Can\'t login, provide, carrect data!' 
     }
   } finally {
-    if(status) {
+    if(ok) {
       redirect('/');
     }
   }

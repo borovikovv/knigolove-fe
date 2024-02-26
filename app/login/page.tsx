@@ -1,7 +1,6 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom'
-import { redirect } from "next/navigation";
 import { loginAction } from '@/lib/actions';
 
 const initialState = {
