@@ -1,5 +1,5 @@
 'use server'
-import setAuthCookie from "@/utils/cookies";
+import { setAuthCookie } from "@/utils/cookies";
 import { redirect } from "next/navigation";
 
 export async function loginAction(prevState: any, formData: FormData) {
