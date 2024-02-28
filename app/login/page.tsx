@@ -2,6 +2,8 @@
 
 import { useFormState, useFormStatus } from 'react-dom'
 import { loginAction } from '@/lib/actions';
+import { Input } from '../components/form/input';
+import { Button } from '../components/button';
 
 const initialState = {
   message: '',
@@ -14,16 +16,23 @@ export default function Page() {
   const { pending } = useFormStatus()
 
   return (
-    <form
-      className="flex flex-col items-center justify-center"
-      action={formAction}
-    >
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      {state.message && <p>{state?.message}</p>}
-      <button className="btn" aria-disabled={pending}>
-        Login
-      </button>
-    </form>
+    <div className='flex flex-col w-full gap-2 items-center justify-center mt-40'> 
+      <form
+        className="flex flex-col w-fit gap-2"
+        action={formAction}
+      >
+        <Input type="email" name="email" placeholder="Email" required />
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        {state.message && <p>{state?.message}</p>}
+        <Button className="w-full" aria-disabled={pending}>
+          Login
+        </Button>
+      </form>
+    </div>
   );
 }

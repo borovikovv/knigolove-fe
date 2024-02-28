@@ -1,0 +1,12 @@
+.input {
+  border: 1px solid rgba(128, 128, 128, 0.253);
+  @apply rounded-sm h-8 min-w-60 px-1;
+}
+.input:focus {
+  border: 1px solid rgba(128, 128, 128, 0.804);
+  outline: none;
+}
+.input::placeholder {
+  color: #8E8E8E;
+  @apply font-light text-sm leading-6;
+}
