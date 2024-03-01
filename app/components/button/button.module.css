@@ -1,6 +1,4 @@
 .button {
-  @apply text-white;
-
   min-width: 100px;
   height: 42px;
 
@@ -15,18 +13,55 @@
 
   box-sizing: border-box;
 }
-.button {
-  background-color: #33b249;
-  border-color: #0f9015;
+.button.access {
+  @apply text-white;
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
   font-size: 15px;
   font-weight: 500;
 }
 
-.button:hover {
-  background-color: #5dbea3;
-  border-color: #0f9015;
+.button.access:hover {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
 
-.button:active {
-  background-color: #6edcbc;
+.button.access:active {
+  background-color: #2ec26c;
+}
+
+
+.button.original {
+  @apply text-black;
+  background-color: #ffe54c;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.button.original:hover {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button.original:active {
+  background-color: #fceb8b;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.button.warn {
+  background-color: #FF013C;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.button.warn:hover {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+}
+
+.button.warn:active {
+  background-color: #fb5178
 }

@@ -29,7 +29,7 @@ export default function Page() {
           required
         />
         {state.message && <p>{state?.message}</p>}
-        <Button className="w-full" aria-disabled={pending}>
+        <Button styleType='access' className="w-full" aria-disabled={pending}>
           Login
         </Button>
       </form>

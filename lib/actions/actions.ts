@@ -1,5 +1,5 @@
 'use server'
-import { setAuthCookie } from "@/utils/cookies";
+import { setAuthCookie } from "@/src/utils/cookies";
 import { redirect } from "next/navigation";
 
 export async function loginAction(prevState: any, formData: FormData) {
@@ -27,5 +27,21 @@ export async function loginAction(prevState: any, formData: FormData) {
     if(ok) {
       redirect('/');
     }
+  }
+}
+
+export async function getUserData() {
+  try {
+    const response = await fetch(`http://localhost:8000/auth/who`, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log(response);
+  } catch(err) {
+    console.error(err);
   }
 }
