@@ -6,10 +6,9 @@
   padding: 0px 40px;
   gap: 20px;
   @apply bg-black;
-  /* background: #e0e5ec */
 }
 .buttons {
-  @apply flex justify-center items-center w-full gap-5;
+  @apply flex justify-between items-center w-full gap-5;
 }
 .btn {
   @apply text-white;

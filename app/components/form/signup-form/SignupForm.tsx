@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
+import { z } from "zod";
 import { useFormState, useFormStatus } from 'react-dom'
-import { loginAction } from '@/lib/actions';
-import { Input } from '../components/form/input';
-import { Button } from '../components/button';
+import { signupAction } from '@/lib/actions';
+import { Input } from "../input";
+import { Button } from "../../button";
 
 const initialState = {
   message: '',
@@ -11,12 +12,12 @@ const initialState = {
   password: '',
 }
  
-export default function Page() {
-  const [state, formAction] = useFormState(loginAction, initialState);
+export function SubmitSignupForm() {
+  const [state, formAction] = useFormState(signupAction, initialState);
   const { pending } = useFormStatus()
 
   return (
-    <div className='flex flex-col w-full gap-2 items-center justify-center mt-40'> 
+    <div className='flex flex-col w-full gap-2 items-center justify-center'> 
       <form
         className="flex flex-col w-fit gap-2"
         action={formAction}
@@ -28,9 +29,11 @@ export default function Page() {
           placeholder="Password"
           required
         />
+        <Input type="first_name" name="first_name" placeholder="First name" required />
+        <Input type="last_name" name="last_name" placeholder="Last name" required />
         {state.message && <p>{state?.message}</p>}
         <Button styleType='access' className="w-full" disabled={pending}>
-          Login
+          Create account
         </Button>
       </form>
     </div>

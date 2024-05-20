@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/header";
-import { ProvideAuth } from "@/src/hooks/useAuth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProvideAuth>
-          <Header />
-          {children}
-        </ProvideAuth>
+        <Header />
+        {children}
       </body>
     </html>
   );
