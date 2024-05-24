@@ -1,19 +1,12 @@
-import { NextResponse, type NextRequest } from 'next/server'
-import { getAuthCookie } from './src/utils';
-import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
  
 export function middleware(request: NextRequest) {
-  // const token = request.cookies.get('Authentication')?.value ?? '';
-  // console.log(token, 'token');
-
-  // const response = NextResponse.next();
-  // request.cookies.set('Authentication', token);
-  // request.headers.set('Authentication', `${token}`);
-  // // console.log(request);
-  // return response
+  const authCookie = request.cookies.get('Authentication');
   
-}
+  const response = NextResponse.next()
+  response.cookies.set('Authentication', `${authCookie?.value ?? ""}`);
+  response.headers.set('Cookie', `Authentication=${authCookie?.value ?? ""}`);
  
-export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  return response
 }

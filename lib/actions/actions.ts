@@ -1,13 +1,14 @@
 'use server'
 import { setAuthCookie } from "@/src/utils/cookies";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 export async function loginAction(prevState: any, formData: FormData) {
   const email = formData.get('email');
   const password = formData.get('password');
   let ok = false;
   try {
-    const response = await fetch(`${process.env.BE_HOST}/auth/signin`, {
+    const response = await fetch(`${process.env.BE_HOST}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -16,11 +17,14 @@ export async function loginAction(prevState: any, formData: FormData) {
       body: JSON.stringify({ password, email }),
     });
     const data = await response.json();
-    console.log(data, "data");
-    setAuthCookie(response);
-    const result = await response.json();
+    cookies().set('Authentication', encodeURIComponent(`${data.token}`), {
+      httpOnly: true, 
+      secure: false,
+      sameSite: 'lax',
+      path: '/',
+    });
     ok = response.ok;
-    return result;
+    return data;
   } catch(err) {
     return {
       message: 'Can\'t login, provide, carrect data!' 
@@ -46,7 +50,7 @@ export async function signupAction(prevState: any, formData: FormData) {
       body: JSON.stringify({ password, email }),
     });
     const data = await response.json();
-    setAuthCookie(response);
+    setAuthCookie(data);
     const result = await response.json();
     ok = response.ok;
     return result;

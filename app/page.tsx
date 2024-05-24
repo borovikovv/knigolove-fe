@@ -16,7 +16,7 @@ export default function Home() {
       <form action={userAction}>
         <UserDataFetch />
       </form>
-      <h1>Dashboard</h1>
+      <h1>{JSON.stringify(state)}</h1>
     </main>
   );
 }
