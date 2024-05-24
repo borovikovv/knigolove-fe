@@ -1,5 +1,4 @@
 'use server'
-import { setAuthCookie } from "@/src/utils/cookies";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
@@ -50,7 +49,6 @@ export async function signupAction(prevState: any, formData: FormData) {
       body: JSON.stringify({ password, email }),
     });
     const data = await response.json();
-    setAuthCookie(data);
     const result = await response.json();
     ok = response.ok;
     return result;

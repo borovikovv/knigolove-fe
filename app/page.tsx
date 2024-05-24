@@ -1,9 +1,5 @@
 'use client';
 
-import Image from "next/image";
-import Link from 'next/link';
-import { cookies } from "next/headers";
-import { Button } from "./components/button";
 import UserDataFetch from "./components/user/user-data-fetch";
 import { getUserData } from "@/lib/user";
 import { useFormState } from "react-dom";
