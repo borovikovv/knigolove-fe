@@ -18,7 +18,13 @@ export async function loginAction(prevState: any, formData: FormData) {
     const data = await response.json();
     cookies().set('Authentication', encodeURIComponent(`${data.token}`), {
       httpOnly: true, 
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+    });
+    cookies().set('RefreshToken', encodeURIComponent(`${data.refreshToken}`), {
+      httpOnly: true, 
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
     });
