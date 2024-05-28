@@ -1,7 +1,10 @@
+'use server';
 import { cookies } from 'next/headers';
 import { RequestOptions } from './types';
 
-export function api(url: string, options?: RequestOptions) {
+export async function api(url: string, options?: RequestOptions) {
+  const apiBase = process.env.NEXT_PUBLIC_BE_HOST;
+  const absoluteApiBase = (apiBase?.startsWith('http://') || apiBase?.startsWith('https://')) ? apiBase : `https://${apiBase}`;
   const { headers: defaultHeaders, ...restDefaultOptions } = options ?? {};
   const opt = {
     headers: {
@@ -13,5 +16,5 @@ export function api(url: string, options?: RequestOptions) {
     ...restDefaultOptions,
   } as RequestOptions;
 
-  return fetch(url, opt);
+  return fetch(`${absoluteApiBase}${url}`, opt);
 }
