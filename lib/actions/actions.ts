@@ -54,7 +54,6 @@ export async function signupAction(prevState: any, formData: FormData) {
       credentials: 'include',
       body: JSON.stringify({ password, email }),
     });
-    const data = await response.json();
     const result = await response.json();
     ok = response.ok;
     return result;

@@ -1,16 +1,11 @@
 'use server';
-import { cookies } from "next/headers";
+import { api } from "../api";
 
 export async function getUserData() {
   try {
-   const res = await (await fetch(`${process.env.NEXT_PUBLIC_BE_HOST}/user/me`, {
-      credentials: 'include',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': cookies().toString(),
-      },
-    })).json();
+   const res = await(
+     await api(`${process.env.NEXT_PUBLIC_BE_HOST}/user/me`)
+   ).json();
 
     return res;
 
