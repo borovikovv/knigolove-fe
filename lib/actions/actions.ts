@@ -22,7 +22,7 @@ export async function loginAction(prevState: any, formData: FormData) {
       sameSite: 'lax',
       path: '/',
     });
-    cookies().set('RefreshToken', encodeURIComponent(`${data.refreshToken}`), {
+    cookies().set('Refresh', encodeURIComponent(`${data.refreshToken}`), {
       httpOnly: true, 
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',

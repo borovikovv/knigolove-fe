@@ -2,9 +2,11 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { User } from "../types";
+import { useFetch } from "../hooks";
 
 type ContextType = {
   user: User | null;
+  setUser: (user: User) => void;
 }
 
 const UserContext = createContext({} as ContextType);
@@ -20,25 +22,26 @@ export function UserProvider({
 
 const useUserProvider = () => {
   const [user, setUser] = useState<null | User>(null);
+  const { api } = useFetch();
 
   useEffect(() => {
     void (async () => {
       try {
-        const res = await(
-          await fetch(`${process.env.NEXT_PUBLIC_BE_HOST}/user/me`, {
-            credentials: 'include',
-          })
-        ).json(); 
+        const response = await api(`/user/me`);
         
-        setUser(res);
+        // if(response?.ok) {
+        //   const data = await response.json(); 
+        //   setUser(data);
+        // }
       } catch (error) {
         console.error(error);
       }
     })()
-  }, []);
+  }, [setUser, api]);
 
   return {
     user,
+    setUser,
   }
 }
 

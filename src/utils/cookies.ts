@@ -5,16 +5,19 @@ export function getAuthCookie() {
   return cookies().get('Authentication')?.value ?? '';
 }
 
-export function setAuthCookie(data: {token: string}) {
-  const expires = 1 * 60 * 60;
-  cookies().set('Authentication', encodeURIComponent(`${data.token}`), {
+export function setAuthCookie(token: string, refreshToken: string) {
+  cookies().set('Authentication', encodeURIComponent(token), {
     httpOnly: true, 
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    expires,
   });
-  
+  cookies().set('Refresh', encodeURIComponent(refreshToken), {
+    httpOnly: true, 
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+  });
 }
 
 export function clearAuthCookie() {
